@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import FeedList from "./components/FeedList";
+import Header from "./components/Header/Header";
+import FeedList from "./components/FeedList/FeedList";
+import Footer from "./components/Footer/Footer";
 
 class App extends Component {
   state = { feeds: [] };
@@ -17,17 +19,11 @@ class App extends Component {
   render() {
     const { feeds } = this.state;
     return (
-      <div className="app">
-        <header className="app-header">
-          <img src="y18.gif" className="app-logo" alt="logo" />
-        </header>
+      <>
+        <Header />
         <FeedList feeds={feeds}></FeedList>
-        <footer className="app-footer">
-          <div>
-            <button>More</button>
-          </div>
-        </footer>
-      </div>
+        <Footer />
+      </>
     );
   }
 }
