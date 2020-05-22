@@ -1,0 +1,75 @@
+.feed-list {
+  height: 85vh;
+  margin: 10px 0;
+  overflow: auto;
+}
+
+.feed {
+  padding: 15px 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.left-pad {
+  padding-left: 10px;
+}
+
+.feed:nth-child(even) {
+  background-color: #e6e7e1;
+}
+
+.comments,
+.points {
+  width: 25px;
+  display: inline-block;
+}
+
+.comments {
+  padding-right: 20px;
+}
+
+.points {
+  text-align: right;
+}
+
+.title-container {
+  order: -1;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.feed a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.feed .upvote {
+  width: 8px;
+  height: 8px;
+  cursor: pointer;
+  color: #979797;
+  font-size: 12px;
+  padding-left: 5px;
+  vertical-align: middle;
+}
+
+@media only screen and (min-width: 830px) {
+  .feed {
+    flex-direction: row;
+    padding: 8px 30px;
+  }
+
+  .title-container {
+    order: initial;
+  }
+
+  .title-container .title {
+    padding-left: 10px;
+  }
+
+  .comments {
+    text-align: right;
+  }
+}

@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import FeedList from "./components/FeedList";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = { feeds: [] };
+
+  componentDidMount() {
+    fetch("https://hn.algolia.com/api/v1/search?tags=front_page")
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({ feeds: data.hits });
+      })
+      .catch(console.log);
+  }
+
+  render() {
+    const { feeds } = this.state;
+    return (
+      <div className="app">
+        <header className="app-header">
+          <img src="y18.gif" className="app-logo" alt="logo" />
+        </header>
+        <FeedList feeds={feeds}></FeedList>
+        <footer className="app-footer">
+          <div>
+            <button>More</button>
+          </div>
+        </footer>
+      </div>
+    );
+  }
 }
 
 export default App;
