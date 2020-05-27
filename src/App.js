@@ -5,16 +5,27 @@ import FeedList from "./components/FeedList/FeedList";
 import Footer from "./components/Footer/Footer";
 
 class App extends Component {
-  state = { feeds: [] };
+  state = { feeds: [], page: 0 };
+  baseUrl = `https://hn.algolia.com/api/v1/search?`;
 
   componentDidMount() {
-    fetch("https://hn.algolia.com/api/v1/search?tags=front_page")
-      .then((res) => res.json())
-      .then((data) => {
-        this.setState({ feeds: data.hits });
-      })
-      .catch(console.log);
+    this.loadFrontPageFeeds();
   }
+
+  loadFrontPageFeeds = () => {
+    fetch(`${this.baseUrl}tags=front_page`)
+      .then((res) => res.json())
+      .then((data) => this.setState({ feeds: data.hits }))
+      .catch(console.log);
+  };
+
+  loadMoreFeeds = () => {
+    const { page } = this.state,
+      nextPage = page + 1;
+    fetch(`${this.baseUrl}page=${nextPage}&hitsPerPage=20`)
+      .then((res) => res.json())
+      .then(({ hits, page }) => this.setState({ feeds: hits, page }));
+  };
 
   render() {
     const { feeds } = this.state;
@@ -22,7 +33,7 @@ class App extends Component {
       <>
         <Header />
         <FeedList feeds={feeds}></FeedList>
-        <Footer />
+        <Footer loadMoreFeeds={this.loadMoreFeeds} />
       </>
     );
   }

@@ -1,10 +1,10 @@
 import React from "react";
 
-const Footer = () => {
+const Footer = ({ loadMoreFeeds }) => {
   return (
     <footer className="app-footer">
       <div>
-        <button>More</button>
+        <button onClick={loadMoreFeeds}>More</button>
       </div>
     </footer>
   );
