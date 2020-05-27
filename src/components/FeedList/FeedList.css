@@ -1,3 +1,10 @@
+.loader {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  font-size: 20px;
+}
+
 .feed-list {
   height: 85vh;
   margin: 10px 0;

@@ -5,7 +5,7 @@ import FeedList from "./components/FeedList/FeedList";
 import Footer from "./components/Footer/Footer";
 
 class App extends Component {
-  state = { feeds: [], page: 0 };
+  state = { feeds: [], page: 0, isLoading: false };
   baseUrl = `https://hn.algolia.com/api/v1/search?`;
 
   componentDidMount() {
@@ -13,27 +13,31 @@ class App extends Component {
   }
 
   loadFrontPageFeeds = () => {
+    this.setState({ isLoading: true });
     fetch(`${this.baseUrl}tags=front_page`)
       .then((res) => res.json())
-      .then((data) => this.setState({ feeds: data.hits }))
+      .then((data) => this.setState({ feeds: data.hits, isLoading: false }))
       .catch(console.log);
   };
 
   loadMoreFeeds = () => {
     const { page } = this.state,
       nextPage = page + 1;
+    this.setState({ isLoading: true });
     fetch(`${this.baseUrl}page=${nextPage}&hitsPerPage=20`)
       .then((res) => res.json())
-      .then(({ hits, page }) => this.setState({ feeds: hits, page }));
+      .then(({ hits, page }) =>
+        this.setState({ feeds: hits, page, isLoading: false })
+      );
   };
 
   render() {
-    const { feeds } = this.state;
+    const { feeds, isLoading } = this.state;
     return (
       <>
         <Header />
-        <FeedList feeds={feeds}></FeedList>
-        <Footer loadMoreFeeds={this.loadMoreFeeds} />
+        <FeedList feeds={feeds} showLoader={isLoading}></FeedList>
+        <Footer loadMoreFeeds={this.loadMoreFeeds} hideButton={isLoading} />
       </>
     );
   }

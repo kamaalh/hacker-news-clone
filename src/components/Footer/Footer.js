@@ -1,11 +1,9 @@
 import React from "react";
 
-const Footer = ({ loadMoreFeeds }) => {
+const Footer = ({ loadMoreFeeds, hideButton }) => {
   return (
     <footer className="app-footer">
-      <div>
-        <button onClick={loadMoreFeeds}>More</button>
-      </div>
+      <div>{!hideButton && <button onClick={loadMoreFeeds}>More</button>}</div>
     </footer>
   );
 };
