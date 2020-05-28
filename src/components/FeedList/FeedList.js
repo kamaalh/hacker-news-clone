@@ -2,7 +2,7 @@ import React from "react";
 import "./FeedList.css";
 import { getDomainName, getRelativeTime } from "../../utils/utility";
 
-const FeedList = ({ feeds, showLoader }) => {
+const FeedList = ({ feeds, showLoader, hideFeed }) => {
   return (
     <div className="feed-list">
       {!showLoader &&
@@ -28,7 +28,18 @@ const FeedList = ({ feeds, showLoader }) => {
                 {getRelativeTime(feed.created_at_i)}
               </span>
               <span className="hide left-pad">
-                [<a href={feed.objectID}>hide</a>]
+                [
+                <a
+                  href="/"
+                  data-feedid={feed.objectID}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    hideFeed(e.target.dataset.feedid);
+                  }}
+                >
+                  hide
+                </a>
+                ]
               </span>
             </div>
           </div>
