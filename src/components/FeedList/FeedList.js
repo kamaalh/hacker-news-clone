@@ -2,7 +2,7 @@ import React from "react";
 import "./FeedList.css";
 import { getDomainName, getRelativeTime } from "../../utils/utility";
 
-const FeedList = ({ feeds, showLoader, hideFeed }) => {
+const FeedList = ({ feeds, showLoader, hideFeed, upvote }) => {
   return (
     <div className="feed-list">
       {!showLoader &&
@@ -10,8 +10,15 @@ const FeedList = ({ feeds, showLoader, hideFeed }) => {
           <div className="feed" key={feed.objectID}>
             <div>
               <span className="comments">{feed.num_comments}</span>
-              <span className="points"> {feed.points}</span>
-              <span className="upvote">▲</span>
+              <span className="points">{feed.points}</span>
+              <span
+                className="upvote"
+                data-id={feed.objectID}
+                data-votes={feed.points}
+                onClick={upvote}
+              >
+                ▲
+              </span>
             </div>
             <div className="title-container">
               <span className="title bold">
