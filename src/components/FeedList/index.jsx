@@ -1,6 +1,6 @@
 import React from "react";
-import "./FeedList.css";
-import { getDomainName, getRelativeTime } from "../../utils/utility";
+import "./index.css";
+import { getDomainName, getRelativeTime } from "../../utils";
 
 const FeedList = ({ feeds, showLoader, hideFeed, upvote }) => {
   return (
