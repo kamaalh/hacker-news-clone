@@ -1,0 +1,19 @@
+.app-footer {
+  text-align: center;
+}
+
+.app-footer button {
+  background-color: transparent;
+  color: #fe6610;
+  border: none;
+  cursor: pointer;
+  padding-top: 10px;
+}
+
+@media only screen and (min-width: 830px) {
+  .app-footer {
+    text-align: left;
+    padding-left: 138px;
+    padding-top: 6px;
+  }
+}
