@@ -13,9 +13,9 @@ const FeedList = ({ feeds, showLoader, hideFeed, upvote }) => {
               <span className="points">{feed.points}</span>
               <span
                 className="upvote"
-                data-id={feed.objectID}
-                data-votes={feed.points}
-                onClick={upvote}
+                onClick={() => {
+                  upvote(feed.objectID, feed.points);
+                }}
               >
                 ▲
               </span>
